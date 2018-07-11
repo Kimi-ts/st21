@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace StStore21.Areas
+namespace StStore21.Data
 {
     public class ApplicationDbContext : IdentityDbContext<IdentityUser>
     {
