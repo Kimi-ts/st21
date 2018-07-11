@@ -184,6 +184,108 @@ namespace StCore21.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("StCore21.Models.PageData", b =>
+                {
+                    b.Property<string>("PageDataId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("MetaDescription")
+                        .IsRequired();
+
+                    b.Property<string>("MetaKeywords")
+                        .IsRequired();
+
+                    b.Property<string>("PageName")
+                        .IsRequired();
+
+                    b.Property<string>("Title")
+                        .IsRequired();
+
+                    b.HasKey("PageDataId");
+
+                    b.ToTable("PageDataItems");
+                });
+
+            modelBuilder.Entity("StCore21.Models.SiteConfig", b =>
+                {
+                    b.Property<string>("SiteConfigId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("City")
+                        .IsRequired();
+
+                    b.Property<string>("ClientEmails")
+                        .IsRequired();
+
+                    b.Property<string>("ClientPhones")
+                        .IsRequired();
+
+                    b.Property<string>("CloseHours")
+                        .IsRequired();
+
+                    b.Property<string>("Copyright")
+                        .IsRequired();
+
+                    b.Property<string>("Country")
+                        .IsRequired();
+
+                    b.Property<string>("Name")
+                        .IsRequired();
+
+                    b.Property<string>("OfficialInfo")
+                        .IsRequired();
+
+                    b.Property<string>("OfficialLicence")
+                        .IsRequired();
+
+                    b.Property<string>("OpenHours")
+                        .IsRequired();
+
+                    b.Property<string>("PartnerEmails")
+                        .IsRequired();
+
+                    b.Property<string>("PartnerPhones")
+                        .IsRequired();
+
+                    b.Property<string>("PostCode")
+                        .IsRequired();
+
+                    b.Property<string>("Street")
+                        .IsRequired();
+
+                    b.Property<string>("WorkingDays")
+                        .IsRequired();
+
+                    b.Property<string>("WorkingDaysString")
+                        .IsRequired();
+
+                    b.HasKey("SiteConfigId");
+
+                    b.ToTable("SiteConfig");
+                });
+
+            modelBuilder.Entity("StCore21.Models.SocialNetworkItem", b =>
+                {
+                    b.Property<string>("SocialNetworkItemId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("IconClass")
+                        .IsRequired();
+
+                    b.Property<string>("Name")
+                        .IsRequired();
+
+                    b.Property<string>("Type")
+                        .IsRequired();
+
+                    b.Property<string>("Url")
+                        .IsRequired();
+
+                    b.HasKey("SocialNetworkItemId");
+
+                    b.ToTable("SocialNetworkItems");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole")

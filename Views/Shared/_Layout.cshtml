@@ -1,23 +1,57 @@
-﻿<!DOCTYPE html>
+﻿@inject ISiteConfigManager siteConfigManager
+@{
+  var siteConfigItem = siteConfigManager.GetSiteConfig();
+
+  var socialNetworks = siteConfigManager.GetSocialNetworkByType("share");
+}
+<!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - StCore21</title>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
+    <title>@ViewData["Title"]</title>
+    @Html.Raw(ViewData["MetaTitle"])
+    @Html.Raw(ViewData["MetaDescription"])
+
+	<meta name="language" content="ru">
+	<meta name="robots" content="all">
+	<meta name="rating" content="general">	
+	<link rel="shortcut icon" href="favicon.ico">
+    <link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192"  href="/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
 
     <environment include="Development">
+        <link rel="stylesheet" href="~/lib/tether/dist/css/tether.css" />
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+        <link rel="stylesheet" href="~/lib/font-awesome/css/font-awesome.min.css">
+        <link rel="stylesheet" href="~/css/points.css" />
         <link rel="stylesheet" href="~/css/site.css" />
     </environment>
     <environment exclude="Development">
-        <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css"
-              asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
-              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
+        <link rel="stylesheet" href="~/lib/tether/dist/css/tether.css" />
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+        <link rel="stylesheet" href="lib/font-awesome/css/font-awesome.min.css">
         <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
     </environment>
 </head>
 <body>
-    <nav class="navbar navbar-inverse navbar-fixed-top">
+    <!-- <nav class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -37,36 +71,126 @@
                 <partial name="_LoginPartial" />
             </div>
         </div>
+    </nav> -->
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <div class="container">
+            <button class="navbar-toggler navbar-toggler-right collapsed" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link text-white-70" asp-area="" asp-controller="Home" asp-action="Index">Главная</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white-70" asp-area="" asp-controller="Discount" asp-action="Index" asp-route-count="16" asp-route-isDisplayNew="false" asp-route-filteredTags="all">Акции</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white-70" asp-area="" asp-controller="Home" asp-action="About">О нас</a>
+                    </li>
+                </ul>
+                @await Html.PartialAsync("_LoginPartial")
+            </div>
+        </div>
     </nav>
 
     <partial name="_CookieConsentPartial" />
 
-    <div class="container body-content">
+    <div class="container body-content bg-light">
         @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; 2018 - StCore21</p>
-        </footer>
     </div>
+    <footer>
+                <footer id="footer" class="footer bg-dark">
+            <div class="points d-none d-md-block">
+                <div class="point point-floating-1"></div>
+                <div class="point point-floating-2"></div>
+                <div class="point point-floating-3"></div>
+                <div class="point point-floating-4"></div>
+                <div class="point point-floating-5"></div>
+                <div class="point point-floating-6"></div>
+                <div class="point point-floating-7"></div>
+                <div class="point point-floating-8"></div>
+                <div class="point point-floating-9"></div>
+            </div>
+            <div class="container overflow-points-container">
+                <div class="row fill-40-viewport py-5 text-white-70 align-items-top">
+                    <div class="col-6 col-md-4">
+                        <ul class="list-unstyled">
+                            <li><h6 class="text-white">@siteConfigItem.Name</h6></li>
+                            <li><p class="mb-0">@siteConfigItem.OfficialLicence</p></li>
+                            <li><p class="mb-0">@siteConfigItem.OfficialInfo</p></li>
+                        </ul>
+                    </div>
+                    <div class="col-6 col-md-2">
+                        <ul class="list-unstyled">
+                            <li class="text-white">
+                                @{foreach (var item in socialNetworks)
+                                {
+                                    <a class="text-white no-hover-underline" href="@item.Url" rel="noopener" target="_blank" >
+                                        <i class="@item.IconClass" aria-hidden="true"></i>
+                                    </a>
+                                }
+                                }
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <ul class="list-unstyled">
+                            <li><h6 class="text-white">Клиентам</h6></li>
+                            @{
+                                var phones = siteConfigItem.ClientPhones.Split(',');
+                            }
+                            @foreach(var phone in phones)
+                            {
+                                <li><p class="mb-0">@phone</p></li>
+                            }
+                            <li><p class="mb-0">@siteConfigItem.WorkingDaysString с @siteConfigItem.OpenHours до @siteConfigItem.CloseHours</p></li>
+                        </ul>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <ul class="list-unstyled">
+                            <li><h6 class="text-white">Партнёрам</h6></li>
+                            @{
+                                var partnerPhones = siteConfigItem.PartnerPhones.Split(',');
+                            }
+                            @foreach(var phone in partnerPhones)
+                            {
+                                <li><p class="mb-0">@phone</p></li>
+                            }
+                            <li><p class="mb-0">@siteConfigItem.PartnerEmails</p></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </footer>
 
     <environment include="Development">
-        <script src="~/lib/jquery/dist/jquery.js"></script>
+        <script src="~/lib/jquery/dist/jquery-3.3.1.slim.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="~/lib/tether/dist/js/tether.js"></script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <script src="~/js/addTagForm.js" asp-append-version="true"></script>
+        <script src="~/js/toggleSaleDescriptionVisibility.js" asp-append-version="true"></script>
+        <script src="~/js/imagePanel.js" asp-append-version="true"></script>
         <script src="~/js/site.js" asp-append-version="true"></script>
     </environment>
     <environment exclude="Development">
-        <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.3.1.min.js"
-                asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+        <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"
+                asp-fallback-src="~/lib/jquery/dist/jquery-3.3.1.slim.min.js"
                 asp-fallback-test="window.jQuery"
-                crossorigin="anonymous"
-                integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT">
+                crossorigin="anonymous">
         </script>
-        <script src="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/bootstrap.min.js"
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="~/lib/tether/dist/js/tether.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"
                 asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
                 asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
                 crossorigin="anonymous"
-                integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa">
+                integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn">
         </script>
+        <script src="https://cdn.jsdelivr.net/npm/vue"></script>
         <script src="~/js/site.min.js" asp-append-version="true"></script>
     </environment>
 

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using StCore21.Models;
 
 namespace StStore21.Data
 {
@@ -22,5 +23,9 @@ namespace StStore21.Data
             // For example, you can rename the ASP.NET Identity table names and more.
             // Add your customizations after calling base.OnModelCreating(builder);
         }
+
+        public DbSet<SiteConfig> SiteConfig { get; set; }
+        public DbSet<SocialNetworkItem> SocialNetworkItems { get; set; }
+        public DbSet<PageData> PageDataItems { get; set; }
     }
 }

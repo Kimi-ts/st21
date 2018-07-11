@@ -8,10 +8,21 @@ using StCore21.Models;
 
 namespace StCore21.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
-        public IActionResult Index()
+        private readonly ISiteConfigManager _siteConfigManager;
+
+        public HomeController(ISiteConfigManager siteConfigManager)
         {
+            _siteConfigManager = siteConfigManager;
+        }
+         public async Task<IActionResult> Index()
+        {
+            var pageData = await _siteConfigManager.GetPageDataByNameAsync("Home");
+            ViewData["Title"] = pageData.Title;
+
+            ViewData["MetaDescription"] = BuildMetaTag("description", pageData.MetaDescription);
+            ViewData["MetaTitle"] = BuildMetaTag("title", pageData.Title);
             return View();
         }
 

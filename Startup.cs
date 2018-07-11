@@ -12,6 +12,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using StCore21.Areas;
+using StCore21.Models;
 
 namespace StCore21
 {
@@ -34,12 +35,7 @@ namespace StCore21
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            // services.AddDbContext<ApplicationDbContext>(options =>
-            //     options.UseSqlite(
-            //         Configuration.GetConnectionString("DefaultConnection")));
-
-            // services.AddDefaultIdentity<IdentityUser>()
-            //     .AddEntityFrameworkStores<ApplicationDbContext>();
+            services.AddScoped<ISiteConfigManager, SiteConfigManager>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
