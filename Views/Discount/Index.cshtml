@@ -1,0 +1,37 @@
+﻿ @model DiscountsListViewModel
+ 
+<p class="text-muted">Подробности акций вы можете уточнить по телефону</p>
+<div class="row">
+  <div class="col-12 col-md-9">
+    @Html.Partial("_ActionsList", @Model.Sales)
+  </div>
+  <div class="col-12 col-md-3">
+    <form asp-action="Index" asp-controller="Discount" method="GET">
+      <fieldset class="form-group">
+        <h5>Фильтры</h5>
+        <hr>
+        <div class="checkbox">
+          <input asp-for="@Model.IsDisplayNew" />
+          <label asp-for="@Model.IsDisplayNew">Только новые</label>
+        </div>
+        <input type="hidden" value="all" asp-for="@Model.FilteredTags" />
+        <button type="submit" class="btn btn-secondary btn-sm">Применить</button>
+      </fieldset>
+    </form>
+    <div class="pt-1">
+      @foreach(var category in Model.Categories)
+      {
+        <h6>@category</h6>
+        <ul class="list-unstyled">
+        @foreach(var tag in Model.FilteredTags)
+        {
+          if (tag.Category == category)
+          {
+            <li><a class="" asp-area="" asp-controller="Discount" asp-action="Index" asp-route-count="16" asp-route-isDisplayNew="@Model.IsDisplayNew" asp-route-filteredTags="@tag.Title">@tag.Title (@tag.SalesCount)</a></li>
+          }
+        }
+        </ul>
+      }
+    </div>
+  </div>
+</div>

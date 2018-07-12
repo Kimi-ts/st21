@@ -38,6 +38,7 @@ namespace StCore21
             services.AddScoped<ISiteConfigManager, SiteConfigManager>();
             services.AddScoped<ISliderItemManager, SliderItemManager>();
             services.AddScoped<IPartnerManager, PartnerManager>();
+            services.AddScoped<IDiscountManager, DiscountManager>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }

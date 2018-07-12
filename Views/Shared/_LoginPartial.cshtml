@@ -5,21 +5,41 @@
 
 @if (SignInManager.IsSignedIn(User))
 {
-    <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })" method="post" id="logoutForm" class="navbar-right">
-        <ul class="nav navbar-nav navbar-right">
-            <li>
-                <a asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @UserManager.GetUserName(User)!</a>
+    var user = await UserManager.GetUserAsync(User);
+        <ul class="nav navbar-nav justify-content-end">
+                @if (await UserManager.IsInRoleAsync(user, "Administrator"))
+                {
+                    <li class="nav-item">
+                        <a class="nav-link text-white-70" asp-area="" asp-controller="Settings" asp-action="Index" title="Управление">Управление</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white-70" asp-area="" asp-controller="Messages" asp-action="DialogList" title="Messages">Сообщения</a>
+                    </li>
+                }
+                else
+                {
+                    <li class="nav-item">
+                        <a class="nav-link text-white-70" asp-area="" asp-controller="Messages" asp-action="Index" asp-route-id="@UserManager.GetUserId(User)" title="Message">Сообщения</a>
+                    </li>
+                }
+            <li class="nav-item">
+                <a class="nav-link text-white-70" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage"> @UserManager.GetUserName(User)</a>
             </li>
-            <li>
-                <button type="submit" class="btn btn-link navbar-btn navbar-link">Logout</button>
+            <li class="nav-item">
+                <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })" method="post" id="logoutForm">
+                    <button type="submit" class="btn navbar-btn navbar-link" role="button">Выйти</button>
+                </form>
             </li>
         </ul>
-    </form>
 }
 else
 {
-    <ul class="nav navbar-nav navbar-right">
-        <li><a asp-area="Identity" asp-page="/Account/Register">Register</a></li>
-        <li><a asp-area="Identity" asp-page="/Account/Login">Login</a></li>
+    <ul class="nav navbar-nav justify-content-end">
+        <li class="nav-item">
+            <a class="nav-link text-white-70" asp-area="Identity" asp-page="/Account/Login">Вход</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-white-70" asp-area="Identity" asp-page="/Account/Register">Регистрация</a>
+        </li>
     </ul>
 }

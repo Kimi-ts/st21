@@ -18,7 +18,7 @@ namespace StCore21.Controllers
             _sliderManager = sliderManamger;
             _siteConfigManager = siteConfigManager;
         }
-         public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index()
         {
             var pageData = await _siteConfigManager.GetPageDataByNameAsync("Home");
             ViewData["Title"] = pageData.Title;
@@ -30,10 +30,13 @@ namespace StCore21.Controllers
             return View(slides);
         }
 
-        public IActionResult About()
+        public async Task<IActionResult> About()
         {
-            ViewData["Message"] = "Your application description page.";
+            var pageData = await _siteConfigManager.GetPageDataByNameAsync("About");
+            ViewData["Title"] = pageData.Title;
 
+            ViewData["MetaDescription"] = BuildMetaTag("description", pageData.MetaDescription);
+            ViewData["MetaTitle"] = BuildMetaTag("title", pageData.Title);
             return View();
         }
 
@@ -45,6 +48,11 @@ namespace StCore21.Controllers
         }
 
         public IActionResult Privacy()
+        {
+            return View();
+        }
+
+        public IActionResult Page404()
         {
             return View();
         }

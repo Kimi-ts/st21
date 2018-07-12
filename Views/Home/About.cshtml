@@ -1,7 +1,45 @@
-﻿@{
-    ViewData["Title"] = "About";
-}
-<h2>@ViewData["Title"]</h2>
-<h3>@ViewData["Message"]</h3>
+﻿@inject ISiteConfigManager siteConfigManager
+@{
+  var siteConfigItem = siteConfigManager.GetSiteConfig();
 
-<p>Use this area to provide additional information.</p>
+  var socialNetworks = siteConfigManager.GetSocialNetworkByType("follow");
+}
+
+<h2 class="mt-3">@ViewData["Title"]</h2>
+<hr />
+<section>
+    <div class="row">
+        <div class="col-6">
+            <address>
+                @siteConfigItem.Name<br />
+                @siteConfigItem.City @siteConfigItem.Street<br />
+                <abbr title="Phone">Тел:</abbr>
+                @siteConfigItem.ClientPhones
+            </address>
+
+            <address>
+                <strong>Время работы:</strong><br />
+                <p>@siteConfigItem.WorkingDaysString @siteConfigItem.OpenHours - @siteConfigItem.CloseHours</p>
+            </address>
+
+            <address>
+                <strong>По вопросам партнёрства:</strong> <br />
+                <a href="mailto:@siteConfigItem.PartnerEmails">@siteConfigItem.PartnerEmails</a><br />
+                <strong>По вопросам работы сайта:</strong> <br />
+                <a href="mailto:@siteConfigItem.ClientEmails">@siteConfigItem.ClientEmails</a>
+            </address>
+        </div>
+        <div class="col-6">
+            <strong>Мы в социальных сетях:</strong>
+            <div>
+                                @{foreach (var item in socialNetworks)
+                                {
+                                    <a class="text-muted no-hover-underline" href="@item.Url" rel="noopener" target="_blank" >
+                                        <i class="@item.IconClass" aria-hidden="true"></i>
+                                    </a>
+                                }
+                                }
+            </div>
+        </div>
+    </div>
+</section>
