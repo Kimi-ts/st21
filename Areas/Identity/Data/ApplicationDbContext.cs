@@ -28,5 +28,6 @@ namespace StStore21.Data
         public DbSet<SocialNetworkItem> SocialNetworkItems { get; set; }
         public DbSet<PageData> PageDataItems { get; set; }
         public DbSet<SliderItem> SliderItems { get; set; }
+        public DbSet<Partner> Partners { get; set; }
     }
 }

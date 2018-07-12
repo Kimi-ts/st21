@@ -1,5 +1,11 @@
 ﻿@model IList<SliderItem>
 
+@inject IPartnerManager _partnersManager
+
+@{
+	var partners = _partnersManager.GetFilteredSliderItems(true);
+}
+
 @await Html.PartialAsync("_Slider", @Model)
 
 <section id="feature-rundown" class="bg-light mb-3">
@@ -42,3 +48,4 @@
 		</div>
 	</div>
 </section>
+@await Html.PartialAsync("_Partners", @partners)
