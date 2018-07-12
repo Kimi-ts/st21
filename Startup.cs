@@ -36,6 +36,7 @@ namespace StCore21
             });
 
             services.AddScoped<ISiteConfigManager, SiteConfigManager>();
+            services.AddScoped<ISliderItemManager, SliderItemManager>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }

@@ -11,9 +11,11 @@ namespace StCore21.Controllers
     public class HomeController : BaseController
     {
         private readonly ISiteConfigManager _siteConfigManager;
+        private readonly ISliderItemManager _sliderManager;
 
-        public HomeController(ISiteConfigManager siteConfigManager)
+        public HomeController(ISliderItemManager sliderManamger, ISiteConfigManager siteConfigManager)
         {
+            _sliderManager = sliderManamger;
             _siteConfigManager = siteConfigManager;
         }
          public async Task<IActionResult> Index()
@@ -23,7 +25,9 @@ namespace StCore21.Controllers
 
             ViewData["MetaDescription"] = BuildMetaTag("description", pageData.MetaDescription);
             ViewData["MetaTitle"] = BuildMetaTag("title", pageData.Title);
-            return View();
+
+            var slides = _sliderManager.GetFilteredSliderItems(false, true);
+            return View(slides);
         }
 
         public IActionResult About()
