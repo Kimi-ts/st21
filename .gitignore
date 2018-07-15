@@ -75,3 +75,15 @@ _[Ss]cripts
 *.dot[Cc]over
 node_modules
 Migrations
+Migrations/20180711113914_Initial.cs
+Migrations/20180712122226_CreateSalesDiscrountsSchema.Designer.cs
+Migrations/20180711113914_Initial.cs
+Migrations/20180711113914_Initial.Designer.cs
+Migrations/20180711115746_CreateSiteConfigSchema.cs
+Migrations/20180711115746_CreateSiteConfigSchema.Designer.cs
+Migrations/20180712120512_CreateSlidesSchema.cs
+Migrations/20180712120512_CreateSlidesSchema.Designer.cs
+Migrations/20180712121157_CreatePartnerSchema.cs
+Migrations/20180712121157_CreatePartnerSchema.Designer.cs
+Migrations/20180712122226_CreateSalesDiscrountsSchema.cs
+Migrations/ApplicationDbContextModelSnapshot.cs
