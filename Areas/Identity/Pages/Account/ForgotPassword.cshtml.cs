@@ -28,8 +28,9 @@ namespace StCore21.Areas.Identity.Pages.Account
 
         public class InputModel
         {
-            [Required]
-            [EmailAddress]
+            [Required(ErrorMessage = "Поле Email обязательное")]
+            [EmailAddress(ErrorMessage = "Пожалуйста, введите корректный email-адрес")]
+            [Display(Name = "Email")]
             public string Email { get; set; }
         }
 
