@@ -40,5 +40,6 @@ namespace StStore21.Data
         public DbSet<Sale> Sales { get; set; }
         public DbSet<Tag> Tags { get; set; }
         public DbSet<SaleTag> SaleTag { get; set; }
+        public DbSet<Message> Messages { get; set; }
     }
 }

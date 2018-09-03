@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 
-namespace Razor_VS_Code_test.Views.Settings
+namespace StCore21.Views.Settings
 {
     public static class ManageNavPages
     {

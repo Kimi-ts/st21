@@ -1,0 +1,68 @@
+@using StCore21.Utils
+
+@inject UserManager<IdentityUser> UserManager
+
+@model MessagesListVievModel
+@{
+    var user = await UserManager.GetUserAsync(User);
+    if (await UserManager.IsInRoleAsync(user, "Administrator")){
+        ViewData["Title"] = "Ваша последняя переписка с " + Model.ChatOwner.UserName;
+    }
+    else{
+        ViewData["Title"] = "Ваша последняя переписка";
+    }
+}
+<p class="text-muted">@ViewData["Title"]</p>
+<hr />
+
+<div class="row">
+    <div class="col-12 col-md-6">
+        <ul class="list-group">
+            @foreach (var message in Model.Messages)
+            {
+                <li class="list-group-item mb-3">
+                    <div class="d-flex flex-row w-100">
+                        @{
+                            var titleLetter = Consts.IconPrimaryPlaceholderUrl + char.ToUpper(message.Author.UserName[0]);
+                            var titleUserName = message.Author.UserName;
+                            var titleDate = message.Date.ToString("MM/dd/yy H:mm:s");
+
+                            if (await UserManager.IsInRoleAsync(message.Author, "Administrator"))
+                            {
+                                titleLetter = Consts.IconSuccessPlaceholderUrl + "A";
+                                titleUserName = "Администратор";
+                            }
+
+                            if (message.Date.Date == DateTime.Now.Date)
+                            {
+                                titleDate = "сегодня в " + message.Date.ToString("H:mm:s");
+                            }
+                        }
+                        <div class="pr-3"><img src="@titleLetter" alt="User Avatar" class="rounded-circle" /></div>
+                        <div class="row w-100">
+                            <div class="d-flex justify-content-between col-12">
+                                <div class="font-weight-bold">@titleUserName</div>
+                                <div class="text-right text-muted small">@titleDate</div>
+                            </div>
+                            <div class="col-12">@message.Text</div>
+                        </div>
+                    </div>
+                </li>
+            }
+        </ul>
+    </div>
+    <div class="col-12 col-md-6">
+        @{if (await UserManager.IsInRoleAsync(@Model.CurrentUser, "Client"))
+        {
+        <div class="jumbotron">
+            <h1 class="display-5">Не забудьте сказать нам о важном</h1>
+            <p class="lead">Пожалуйста, в своём сообщении укажите ваше имя, суть вашей проблемы, срочность выполнения работ, марку и год выпуска авто, ваш адрес, а также удобный вам способ связи - мы можем перезвонить вам или ответить на ваш email.</p>
+        </div>
+        }
+        }
+    </div>
+</div>
+@Html.Partial("_AddNewMessage", new  AddNewMessageViewModel{ MessageText = String.Empty, AuthorId = @Model.CurrentUser.Id, ChatOwnerId = @Model.ChatOwner.Id})
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}
